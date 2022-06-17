@@ -1,5 +1,5 @@
 cmake_minimum_required(VERSION 3.22)
-project(CustomWindow)
+project(TemplateWindow)
 
 set(CMAKE_CXX_STANDARD 14)
 set(CMAKE_AUTOMOC ON)
@@ -16,8 +16,8 @@ find_package(Qt5 COMPONENTS
 
 include_directories(resources)
 
-add_executable(CustomWindow src/main.cpp app_win32.rc src/widget.cpp src/widget.h src/widget.ui)
-target_link_libraries(CustomWindow
+add_executable(TemplateWindow src/main.cpp app_win32.rc src/widget.cpp src/widget.h src/widget.ui)
+target_link_libraries(TemplateWindow
         Qt5::Core
         Qt5::Gui
         Qt5::Widgets
