@@ -5,19 +5,35 @@ set(CMAKE_CXX_STANDARD 14)
 set(CMAKE_AUTOMOC ON)
 set(CMAKE_AUTORCC ON)
 set(CMAKE_AUTOUIC ON)
-
+# 设置
 set(CMAKE_PREFIX_PATH "C:/Qt/Qt5.14.2/5.14.2/mingw73_64")
-
+# 添加用到的qt库
 find_package(Qt5 COMPONENTS
         Core
         Gui
         Widgets
         REQUIRED)
+# 设置目录
+aux_source_directory(${PROJECT_SOURCE_DIR} DIR_MAIN_SRCS)
+aux_source_directory(${PROJECT_SOURCE_DIR}/resources DIR_RESOURCES_SRCS)
+aux_source_directory(${PROJECT_SOURCE_DIR}/src DIR_SRC_SRCS)
 
-include_directories(resources)
+# 添加qrc资源
+qt5_add_resources(QRC_FILES resources/img.qrc)
 
-add_executable(TemplateWindow src/main.cpp app_win32.rc src/widget.cpp src/widget.h src/widget.ui)
-target_link_libraries(TemplateWindow
+# 配置debug 和 release，release无cmd窗口
+IF (CMAKE_BUILD_TYPE STREQUAL Debug)
+    add_executable(${PROJECT_NAME}
+            resources/app_win32.rc
+            ${DIR_MAIN_SRCS} ${DIR_RESOURCES_SRCS} ${DIR_SRC_SRCS}
+            ${QRC_FILES})
+else(CMAKE_BUILD_TYPE STREQUAL Release)
+    add_executable(${PROJECT_NAME}
+            WIN32 resources/app_win32.rc ${QRC_FILES}
+            ${DIR_MAIN_SRCS} ${DIR_RESOURCES_SRCS} ${DIR_SRC_SRCS} ${QRC_FILES})
+ENDIF()
+
+target_link_libraries(${PROJECT_NAME}
         Qt5::Core
         Qt5::Gui
         Qt5::Widgets

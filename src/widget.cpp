@@ -31,9 +31,9 @@ Widget::Widget(QWidget *parent)
     connect(ui->btnMin, SIGNAL(clicked()), this, SLOT(btnMinClickedSlot()));
     connect(ui->btnClose, SIGNAL(clicked()), this, SLOT(btnCloseClickedSlot()));
 
-    ui->btnMin->setStyleSheet("border-image: url(../resources/min.png)");
-    ui->btnMax->setStyleSheet("border-image: url(../resources/fullscreen3.png)");
-    ui->btnClose->setStyleSheet("border-image: url(../resources/close.png)");
+    ui->btnMin->setStyleSheet("border-image: url(:/png/min.png)");
+    ui->btnMax->setStyleSheet("border-image: url(:/png/fullscreen3.png)");
+    ui->btnClose->setStyleSheet("border-image: url(:/png/close.png)");
 }
 
 Widget::~Widget()
@@ -79,15 +79,15 @@ void Widget::closeEvent(QCloseEvent *event)
 
 void Widget::btnMaxClickedSlot()
 {
-    ui->btnMax->setStyleSheet("border-image: url(../resources/fullscreen4.png)");
+    ui->btnMax->setStyleSheet("border-image: url(:/png/fullscreen4.png)");
     if(this->isMaximized()){
         ui->layoutMain->setMargin(9);
-        ui->btnMax->setStyleSheet("border-image: url(../resources/fullscreen3.png)");
+        ui->btnMax->setStyleSheet("border-image: url(:/png/fullscreen3.png)");
         this->showNormal();
     }
     else{
         ui->layoutMain->setMargin(0);
-        ui->btnMax->setStyleSheet("border-image: url(../resources/fullscreen4.png)");
+        ui->btnMax->setStyleSheet("border-image: url(:/png/fullscreen4.png)");
         this->showMaximized();
     }
 }
